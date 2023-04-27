@@ -1,0 +1,105 @@
+[gd_scene load_steps=9 format=3 uid="uid://c7uxk76iwgblt"]
+
+[ext_resource type="Material" uid="uid://bxqhq60kc7evx" path="res://materials/mat_floor.tres" id="1_0lhxj"]
+[ext_resource type="Material" uid="uid://b8v41g0rdp2x3" path="res://materials/mat_player.tres" id="1_h3vcy"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="2_bfdm2"]
+[ext_resource type="Script" path="res://scripts/camera.gd" id="4_n2ieb"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_krtvw"]
+material = ExtResource("1_0lhxj")
+size = Vector2(100, 100)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qdk0c"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_73fvx"]
+material = ExtResource("1_h3vcy")
+radius = 0.4
+height = 1.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_tw3jb"]
+size = Vector3(4, 1, 4)
+
+[node name="main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Floor1" type="Node3D" parent="."]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Floor1"]
+transform = Transform3D(1.00025, 0, 0, 0, 1.00025, 0, 0, 0, 1.00025, 0, 0, 0)
+use_collision = true
+mesh = SubResource("PlaneMesh_krtvw")
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("4_n2ieb")
+target = NodePath("../Player/Marker3D")
+distance = 4.0
+
+[node name="Player" type="StaticBody3D" parent="." node_paths=PackedStringArray("camera")]
+script = ExtResource("2_bfdm2")
+camera = NodePath("../Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_qdk0c")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+mesh = SubResource("CapsuleMesh_73fvx")
+
+[node name="Marker3D" type="Marker3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Boxes" type="Node3D" parent="."]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.9501, 0.5, -8.37071)
+mesh = SubResource("BoxMesh_tw3jb")
+
+[node name="CSGMesh3D10" type="CSGMesh3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.4221, 0.499996, -16.19)
+mesh = SubResource("BoxMesh_tw3jb")
+
+[node name="CSGMesh3D11" type="CSGMesh3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5273, 0.499996, -28.5184)
+mesh = SubResource("BoxMesh_tw3jb")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.36059, 0.499996, 23.8531)
+mesh = SubResource("BoxMesh_tw3jb")
+
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.3733, 0.5, -7.10422)
+mesh = SubResource("BoxMesh_tw3jb")
+
+[node name="CSGMesh3D4" type="CSGMesh3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.70499, 0.5, -32.7077)
+mesh = SubResource("BoxMesh_tw3jb")
+
+[node name="CSGMesh3D5" type="CSGMesh3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.9541, 0.499999, 10.943)
+mesh = SubResource("BoxMesh_tw3jb")
+
+[node name="CSGMesh3D6" type="CSGMesh3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.6849, 0.499995, 15.1578)
+mesh = SubResource("BoxMesh_tw3jb")
+
+[node name="CSGMesh3D12" type="CSGMesh3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5944, 0.499991, 32.6337)
+mesh = SubResource("BoxMesh_tw3jb")
+
+[node name="CSGMesh3D7" type="CSGMesh3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.3443, 0.499999, -21.6314)
+mesh = SubResource("BoxMesh_tw3jb")
+
+[node name="CSGMesh3D8" type="CSGMesh3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.5412, 0.499999, 37.9959)
+mesh = SubResource("BoxMesh_tw3jb")
+
+[node name="CSGMesh3D9" type="CSGMesh3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.82778, 0.499999, 29.4276)
+mesh = SubResource("BoxMesh_tw3jb")
